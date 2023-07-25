@@ -1,0 +1,15 @@
+Header set Access-Control-Allow-Origin https://apifootball.com
+Header set Access-Control-Allow-Credentials true
+Header always append X-Frame-Options SAMEORIGIN
+RewriteEngine On
+##RewriteCond %{HTTPS} off
+##RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+##RewriteRule ^(.+)$ $1.php [L,QSA]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f 
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+RewriteRule ^blog-detail/([0-9a-zA-Z-]+) blog-detail.php?link=$1
+RewriteRule ^service-detail/([0-9a-zA-Z-]+) service-detail.php?link=$1
+RewriteRule ^service-checkout/([0-9a-zA-Z-]+)/([0-9a-zA-Z-]+) service-checkout.php?link=$1&package_link=$2
+RewriteRule ^service-checkout/([0-9a-zA-Z-]+) service-checkout.php?link=$1
